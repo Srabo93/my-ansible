@@ -4,6 +4,7 @@
     - wireshark
     - fzf
     - tldr
+    - ripgrep
   tags:
     - install
     - productivity

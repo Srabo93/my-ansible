@@ -11,12 +11,11 @@
     # - include: tasks/ssh.yml
     - include: tasks/core-setup.yml
     - include: tasks/composer-setup.yml
-    # - include: tasks/node-setup.yml
-    - include: tasks/node-packagemanager.yml
-    # - include: tasks/zsh-setup.yml
-    # - include: tasks/productivity-tools.yml
-    # - include: tasks/slack-setup.yml
-    # - include: tasks/nvim-setup.yml
+    - include: tasks/node-npm.yml
+    - include: tasks/zsh-setup.yml
+    - include: tasks/productivity-tools.yml
+    - include: tasks/php-setup.yml
+    - include: tasks/nvim-setup.yml
     # - include: tasks/brave.yml
     # - include: tasks/dotfiles.yml
     # - include: tasks/personal-projects.yml

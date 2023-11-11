@@ -1,0 +1,6 @@
+- name: Install PHP 8.1/CGI
+  apt: name={{item}}
+  with_items:
+    - php8.1
+    - php8.1-cli
+    - php8.1-cgi
