@@ -18,3 +18,4 @@
     - include_tasks: tasks/productivity-tools.yml
     - include_tasks: tasks/php-setup.yml
     - include_tasks: tasks/nvim-setup.yml
+    - include_tasks: tasks/thorium.yml

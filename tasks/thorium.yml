@@ -1,0 +1,20 @@
+- name: Create a temporary directory
+  ansible.builtin.file:
+    path: "~/thorium_browser"
+    state: directory
+
+- name: Download Thorium Browser .deb package
+  ansible.builtin.get_url:
+    url: "https://github.com/Alex313031/thorium/releases/download/M117.0.5938.157/thorium-browser_117.0.5938.157_amd64.deb"
+    dest: "~/thorium_browser/thorium-browser_117.0.5938.157_amd64.deb"
+  tags:
+    - install
+    - productivity
+
+- name: Install Thorium Browser
+  ansible.builtin.apt:
+    deb: "~/thorium_browser/thorium-browser_117.0.5938.157_amd64.deb"
+    state: present
+  tags:
+    - install
+    - productivity
