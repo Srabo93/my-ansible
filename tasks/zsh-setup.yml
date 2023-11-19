@@ -28,3 +28,16 @@
     - productivity
     - dotfiles
     - zsh
+- name: Install Zoxide
+  shell: "curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash"
+- name: Add zoxide initialization to zshrc
+  lineinfile:
+    path: ~/.zshrc
+    line: 'eval "$(zoxide init zsh)"'
+    insertafter: EOF
+  become: yes
+  tags:
+    - install
+    - productivity
+    - dotfiles
+    - zsh
