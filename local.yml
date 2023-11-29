@@ -11,7 +11,7 @@
       changed_when: False
   tasks:
     - include_tasks: tasks/core-setup.yml
-    - include_tasks: tasks/ssh.yml
+    # - include_tasks: tasks/ssh.yml
     - include_tasks: tasks/composer-setup.yml
     - include_tasks: tasks/node-npm.yml
     - include_tasks: tasks/zsh-setup.yml

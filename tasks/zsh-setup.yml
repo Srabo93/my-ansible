@@ -19,22 +19,20 @@
     - productivity
     - dotfiles
     - zsh
-- name: Install zsh-autosuggestions
-  ansible.builtin.git:
-    repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
-    dest: "~/.oh-my-zsh/plugins/zsh-autosuggestions"
+- name: Install Zoxide
+  shell: "curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash"
+  become: yes
   tags:
     - install
     - productivity
     - dotfiles
     - zsh
-- name: Install Zoxide
-  shell: "curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash"
 - name: Add zoxide initialization to zshrc
   lineinfile:
-    path: ~/.zshrc
+    path: /home/armin/.zshrc
     line: 'eval "$(zoxide init zsh)"'
     insertafter: EOF
+    state: present
   become: yes
   tags:
     - install

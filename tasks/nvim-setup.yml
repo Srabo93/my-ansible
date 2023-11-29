@@ -1,32 +1,56 @@
 - name: Remove neovim
+  become: true
   shell: rm -rf ~/neovim
   tags:
     - install
     - neovim
-- name: Clone Neovim
-  ansible.builtin.git:
-    repo: "https://github.com/neovim/neovim.git"
-    dest: "{{ lookup('env', 'HOME') }}/neovim"
-  tags:
-    - install
-    - neovim
-- name: Build neovim
-  shell: "cd {{ lookup('env', 'HOME') }}/neovim && make -j 20"
-  tags:
-    - install
-    - neovim
-- name: Install neovim
+
+- name: Download Neovim tarball to ~/Downloads
   become: true
-  shell: "cd {{ lookup('env', 'HOME') }}/neovim && make install"
+  ansible.builtin.get_url:
+    url: https://github.com/neovim/neovim/releases/download/v0.9.4/nvim-linux64.tar.gz
+    dest: "/home/armin/Downloads/nvim-linux64.tar.gz"
   tags:
     - install
     - neovim
+
+- name: Extract Neovim tarball to ~/Downloads
+  become: true
+  ansible.builtin.unarchive:
+    src: "/home/armin/Downloads/nvim-linux64.tar.gz"
+    dest: "/home/armin/Downloads"
+    remote_src: true
+    creates: "/home/armin/Downloads/nvim-linux64"
+  tags:
+    - install
+    - neovim
+
+- name: Move extracted files to ~/bin
+  become: true
+  ansible.builtin.command:
+    cmd: mv "/home/armin/Downloads/nvim-linux64" "/home/armin/.local/bin"
+  tags:
+    - install
+    - neovim
+
+- name: Create a symlink to nvim
+  become: true
+  ansible.builtin.file:
+    src: "/home/armin/.local/bin/nvim-linux64/bin/nvim"
+    dest: "/home/armin/.local/bin/nvim"
+    state: link
+    force: yes # Add force option to overwrite existing link
+  tags:
+    - install
+    - neovim
+
 - name: Clone Astronvim repository
   git:
     repo: "https://github.com/Astronvim/Astronvim"
-    dest: "~/.config/nvim"
+    dest: "/home/armin/.config/nvim"
     depth: 1
+
 - name: Clone userconfig
   git:
     repo: "https://github.com/Srabo93/astronvim_config"
-    dest: "~/.config/nvim/lua/user"
+    dest: "/home/armin/.config/nvim/lua/user"
